@@ -51,4 +51,4 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
    $ flask run
    ```
 
-You should now be able to access the app at [http://localhost:5000](http://localhost:5000)!
+Now go to [http://localhost:5000/stalagmite](http://localhost:5000/stalagmite) ! Each load of the page will generate a new stalagmite. 
