@@ -17,16 +17,25 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
 
 4. Create a new virtual environment:
 
+	Linux:
    ```bash
    $ python -m venv venv
    $ . venv/bin/activate
+   ```
+   
+   Windows:
+   ```bash
+   $ python -m venv venv
+   $ .\venv\Scripts\activate
    ```
 
 5. Install the requirements:
 
    ```bash
    $ pip install -r requirements.txt
+   $ pip install --upgrade openai
    ```
+
 
 6. Make a copy of the example environment variables file:
 
