@@ -52,3 +52,5 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
    ```
 
 Now go to [http://localhost:5000/stalagmite](http://localhost:5000/stalagmite) ! Each load of the page will generate a new stalagmite. 
+
+To modify the OpenAI prompt, edit the `PROMPT` variable in he .env file.

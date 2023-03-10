@@ -10,7 +10,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/stalagmite", methods=["GET"])
 def index():
     response = openai.Image.create(
-    prompt="stalagmite",
+    prompt=os.getenv("PROMPT"),
     n=1,
     size="1024x1024"
 	)
