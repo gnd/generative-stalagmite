@@ -9,7 +9,17 @@
 </head>
 
 <body>
-  <div style="width:1024px; margin:0 auto;">
+	<form action="/stalagmite" method="GET">
+		<div style="width:{{ res }}px; margin:0 auto;">
+			<label for="prompt">Prompt : </label>
+			<input name="prompt" id="prompt" value="{{ prompt }}" />
+			<input type="submit">
+		</div>
+	</form>
+	{% if image_url %}
+  <div style="width:{{ res }}px; margin:0 auto;">
 	<img src="{{ image_url }}"/>
   </div>
+  {% endif %}
+  
 </body>
