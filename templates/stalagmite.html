@@ -12,7 +12,9 @@
 	<form action="/stalagmite" method="GET">
 		<div style="width:{{ res }}px; margin:0 auto;">
 			<label for="prompt">Prompt : </label>
-			<input name="prompt" id="prompt" value="{{ prompt }}" />
+			</br>
+			<textarea name="prompt" id="prompt" style="width: 100%; margin:0 auto; height: 100px;">{{ prompt }}</textarea>
+			</br>
 			<input type="submit">
 		</div>
 	</form>
