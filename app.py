@@ -40,15 +40,16 @@ def generateImage(p,res):
     response = openai.Image.create(
                 prompt=p,
                 n=1,
-                size=f"{res}x{res}"
+                size=f"{res}x{res}",
+                response_format="b64_json"
             )
-    image_url = response['data'][0]['url']
-    return image_url
+    image_data = response['data'][0]['b64_json']
+    return image_data
 
 def loadNextThread(p,res):
     app.logger.info("Loading asynchrounsly "+p+" ...")
-    image_url = generateImage(p,res)
-    cache['next'] = image_url
+    image_data = generateImage(p,res)
+    cache['next'] = image_data
     cache['nextStatus'] = "ready"
     app.logger.info("Next image ready")
     return
@@ -64,7 +65,7 @@ def index():
         p=os.getenv("PROMPT")
         return render_template("stalagmite.html",res=res,prompt=p)
     else :
-        image_url = ""
+        image_data = ""
         if cache['nextStatus'] == "empty" :
             cache['nextStatus'] = "loading"
             loadNext(p,res)
@@ -76,12 +77,11 @@ def index():
                     waited += 1
                     time.sleep(1)
             if cache['nextStatus'] == "ready" :
-                image_url = cache['next']
+                image_data = cache['next']
                 cache['nextStatus'] = "loading"
                 loadNext(p,res)
 
-        if image_url == "" :
-            image_url = generateImage(p,res)
+        if image_data == "" :
+            image_data = generateImage(p,res)
 
-        app.logger.info(image_url)
-        return render_template("stalagmite.html", image_url=image_url,res=res,prompt=p)
+        return render_template("stalagmite.html", image_data=image_data,res=res,prompt=p)

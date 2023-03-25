@@ -16,9 +16,9 @@
 			<input type="submit">
 		</div>
 	</form>
-	{% if image_url %}
+	{% if image_data %}
   <div style="width:{{ res }}px; margin:0 auto;">
-	<img src="{{ image_url }}"/>
+	<img src="data:image/png;base64, {{ image_data }}"/>
   </div>
   {% endif %}
   
