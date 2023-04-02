@@ -20,16 +20,21 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
 	Linux:
    ```bash
    $ python -m venv venv
+   ```
+
+5. Activate the environment
+
+   Linux:
+   ```bash
    $ . venv/bin/activate
    ```
    
    Windows:
-   ```bash
-   $ python -m venv venv
-   $ .\venv\Scripts\activate
+   ```powershell
+   > .\venv\Scripts\activate
    ```
 
-5. Install the requirements:
+6. Install the requirements:
 
    ```bash
    $ pip install -r requirements.txt
@@ -37,15 +42,15 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
    ```
 
 
-6. Make a copy of the example environment variables file:
+7. Make a copy of the example environment variables file:
 
    ```bash
    $ cp .env.example .env
    ```
 
-7. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file.
+8. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file.
 
-8. Run the app:
+9. Run the app:
 
    ```bash
    $ flask run
