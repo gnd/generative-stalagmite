@@ -6,16 +6,27 @@
     href="{{ url_for('static', filename='stalagmite.png') }}"
   />
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <script>
+    var prompt_visible = False;
+
+    function prompt_visibility() {
+      prompt_visible = !prompt_visible; 
+
+      if (prompt_visible) {
+		document.getElementById('prompt').style.display = 'block';
+      } else {
+		document.getElementById('prompt').style.display = 'none';
+	  }
+	}
+  </script>
 </head>
 
 <body>
 	<form action="/stalagmite" method="GET">
 		<div style="width:{{ res }}px; margin:0 auto;">
-			<label for="prompt">Prompt : </label>
-			</br>
-			<textarea name="prompt" id="prompt" style="width: 100%; margin:0 auto; height: 100px;">{{ prompt }}</textarea>
-			</br>
+			<textarea name="prompt" id="prompt" style="width: 100%; margin:0 auto; height: 100px; display: none;">{{ prompt }}</textarea>
 			<input type="submit">
+			<button onclick="prompt_visibility()">Show prompt</button>
 		</div>
 	</form>
 	{% if image_data %}
