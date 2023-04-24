@@ -17,3 +17,5 @@ build/
 
 .env
 applog.log
+
+output_image*.png
