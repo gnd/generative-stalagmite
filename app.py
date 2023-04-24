@@ -5,7 +5,12 @@ from flask import Flask, redirect, render_template, request, url_for
 import logging
 from logging.config import dictConfig
 import time, threading
-
+import sys
+import json
+import base64
+import io
+import datetime
+import math
 app = Flask(__name__)
 
 dictConfig({
@@ -57,6 +62,52 @@ def loadNextThread(p,res):
 def loadNext(p,res) :
     threading.Thread(target=loadNextThread,args=(p,res)).start()
 
+@app.route("/stalagmiteBatch", methods=["GET"])
+def stalagmiteBatch():
+    p = request.args.get("prompt")
+    num = int(request.args.get("num"))
+    maxPerRequest = 10
+    numRequests = math.ceil(num/maxPerRequest)
+    numRemaining = num
+    res=os.getenv("RESOLUTION")
+    if p is None :
+        p=os.getenv("PROMPT")
+
+    # Get the current date and time as a string
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Create a folder with the current date and time
+    output_folder = os.path.join(os.getcwd(), current_time)
+    os.makedirs(output_folder, exist_ok=True)
+
+    fileNumber = 1
+    for r in range(numRequests):
+        numThisRequest = min(numRemaining,maxPerRequest)
+        print("Generating {} images for promtp {}".format(numThisRequest,p))
+        response = openai.Image.create(
+                    prompt=p,
+                    n=numThisRequest,
+                    size=f"{res}x{res}",
+                    response_format="b64_json")
+        # Decode the base64-encoded image data
+
+        for i, image in enumerate(response['data']):
+            # Decode the base64-encoded image data
+            image_data = base64.b64decode(image['b64_json'])
+
+            # Create a unique file name for each image
+            file_name = f"output_image_{fileNumber}.png"
+            fileNumber += 1
+            file_path = os.path.join(output_folder, file_name)
+
+            # Save the image to the disk
+            with open(file_path, 'wb') as f:
+                f.write(image_data)
+
+        numRemaining -= numThisRequest
+
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
+       
 @app.route("/stalagmite", methods=["GET"])
 def index():
     p = request.args.get("prompt")
