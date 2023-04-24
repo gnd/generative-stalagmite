@@ -58,6 +58,7 @@ This uses the [Flask](https://flask.palletsprojects.com/en/2.0.x/) web framework
 
 Now go to [http://localhost:5000/stalagmite](http://localhost:5000/stalagmite) ! Each load of the page will generate a new stalagmite. 
 
+In order to batch create images, go to [http://localhost:5000/stalagmiteBatch?prompt=stalagmite&num=4](http://localhost:5000/stalagmiteBatch?prompt=stalagmite&num=4). `num` is the number of images you want to create. OpenAPI support up to 10 images per request, so if you request more than 10, it will be divided into multiple requests. All the retrieved images will be stored in a folder named with current date in PNG format. 
 
 ## Parameters
 You can modify several parameters of this app in the .env file.
